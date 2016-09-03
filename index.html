@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <title>Test tornado web-app</title>
+  <link href="//netdna.bootstrapcdn.com/twitter-bootstrap/2.3.1/css/bootstrap-combined.no-icons.min.css" rel="stylesheet">
+  <script type="text/javascript" src="//ajax.googleapis.com/ajax/libs/jquery/1.8.2/jquery.min.js"></script>
+</head>
+<body>
+  <div class="container">
+    <h1>web app</h1>
+      <span id="error"></span>
+    <hr>
+      Current num sum : <span id="sum"></span>
+    <hr>
+      <strong>Choose your num:</strong>
+      <input type="range" min="1" max="10" value="5" id="num" oninput="sendMsg();">
+      <output id="numOutput">5</output>
+  </div>
+<script>
+    var ws = new WebSocket('ws://localhost:8888/ws');
+    var $sum = $('#sum');
+    var $error = $('#error');
+    var $num = $('#num');
+    ws.onmessage = function(ev){
+        var json = JSON.parse(ev.data);
+        if(json.hasOwnProperty('error'))
+        {
+            $error.text(json.error);
+        }
+        else {
+            $sum.text(json.sum);
+        }
+
+    };
+    function sendMsg() {
+        $('#numOutput').text($num.val());
+        ws.send($num.val());
+    }
+  </script>
+</body>
+</html>
