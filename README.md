@@ -6,9 +6,9 @@
 
 ## Installation
 
-1. `git clone https://github.com/hiroakis/tornado-websocket-example.git`
+1. `git clone https://github.com/hiroakis/test-tornado-example.git`
 
-2. `cd tornado-websocket-example`
+2. `cd test-tornado-example`
 
 3. `pip install -r requirements.txt`
 
